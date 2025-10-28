@@ -15,3 +15,8 @@ python manage.py createsuperuser
 # Run the server
 ```
 python manage.py runserver
+```
+## How to run tests
+```
+pytest
+```

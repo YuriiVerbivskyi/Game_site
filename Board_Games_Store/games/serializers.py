@@ -18,13 +18,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if data['password'] != data['password_check']:
-            raise serializers.ValidationError({"password_check": "Паролі не збігаються."})
+            raise serializers.ValidationError({"password_check": "Passwords don`t match"})
 
         if User.objects.filter(email=data['email']).exists():
-            raise serializers.ValidationError({"email": "Ця електронна пошта вже використовується."})
+            raise serializers.ValidationError({"email": "This email already used"})
 
         if User.objects.filter(username=data['username']).exists():
-            raise serializers.ValidationError({"username": "Це ім'я користувача вже зайняте."})
+            raise serializers.ValidationError({"username": "Nickname already used"})
 
         return data
 

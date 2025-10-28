@@ -51,6 +51,12 @@ class PublisherDetail(APIView):
         logger.warning("Failed to update publisher")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, pk):
+        obj = self.get_object(pk)
+        obj.delete()
+        logger.info(f"Publisher {pk} deleted")
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class GameList(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -91,6 +97,12 @@ class GameDetail(APIView):
             return Response(serializer.data)
         logger.warning("Failed to update game")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        obj = self.get_object(pk)
+        obj.delete()
+        logger.info(f"Game {pk} deleted")
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class RegisterSerializer(serializers.ModelSerializer):
